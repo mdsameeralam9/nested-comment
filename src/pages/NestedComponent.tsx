@@ -1,5 +1,11 @@
 import React from "react";
 
+const data = [
+    {id: 1, comment: "Hello, how are you", reply: [{id: 2, comment: "I am fine, thank you"}]},
+    {id: 3, comment: "Hello, how are you", reply: []},
+    {id: 4, comment: "Hello, how are you", reply: [{id: 5, comment: "I am fine, thank you"}]}
+]
+
 const NestedComponent = () => {
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -20,7 +26,7 @@ const NestedComponent = () => {
         </select>
       </div>
       <div className="flex flex-col gap-1">
-        {[1, 2, 3, 4, 5].map((i, index) => (
+        {data.map((i, index) => (
           <div className="comment bg-blue-200" key={index}>
             <div className="commentHeader">
               <span>Sameer</span>
