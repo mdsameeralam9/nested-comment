@@ -1,10 +1,29 @@
 import { useState } from "react";
 
-const SingleComment = ({ data = {} }) => {
+const SingleComment = ({ data = {}, handleReplyComment = () => {} }) => {
   const [isReplying, setIsReplying] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+  const [replyComment, setReplyComment] = useState("");
 
-  const handleReply = () => {
+  const handleReply = (id) => {
     setIsReplying(!isReplying);
+    setSelectedId(id);
+  };
+
+  const handleChange = (e) => {
+    setReplyComment(e.target.value);
+  };
+
+  // handle replycommnet
+  const handleReplyCommnet = () => {
+    if (!replyComment) return;
+    const reply = {
+      parentId: selectedId,
+      comment: replyComment,
+    };
+
+    handleReplyComment(reply);
+    setReplyComment("");
   };
 
   return (
@@ -15,7 +34,7 @@ const SingleComment = ({ data = {} }) => {
       </div>
       <div className="commentFooter">
         <button
-          onClick={handleReply}
+          onClick={() => handleReply(data.id)}
           className="bg-blue-950 border-b-black py-0.5 px-8 cursor-pointer text-white"
         >
           Reply
@@ -27,13 +46,18 @@ const SingleComment = ({ data = {} }) => {
         <>
           <div className="inputwrapeer flex  gap-1 items-center my-2">
             <textarea
+              value={replyComment}
               className="w-[80%] border-2 pl-3 bg-white"
               name="message"
               rows="2"
               cols="40"
               placeholder="Type here..."
+              onChange={handleChange}
             ></textarea>
-            <button className="bg-blue-950 py-2 border-b-black py-0.5 px-8 cursor-pointer text-white">
+            <button
+              onClick={handleReplyCommnet}
+              className="bg-blue-950 py-2 border-b-black py-0.5 px-8 cursor-pointer text-white"
+            >
               Reply Comment
             </button>
           </div>
@@ -41,10 +65,9 @@ const SingleComment = ({ data = {} }) => {
           {/**  child render */}
           {data?.reply?.length > 0 && (
             <div className="child pl-2 border-l-2">
-                {data.reply?.map((data) => (
-                  <SingleComment data={data} key={data.id}/>
-                ))}
-              
+              {data.reply?.map((data) => (
+                <SingleComment data={data} key={data.id} />
+              ))}
             </div>
           )}
         </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import CommentComponent from "../components/Comment";
 
 const data = [
@@ -22,13 +22,28 @@ const data = [
   },
 ];
 
+const updateComment = (commentState, newData) => {
+  const newComment = {
+    comment: newData.comment,
+    id: Date.now(),
+    reply: [],
+  };
+
+  return commentState.map((singleComment) => {
+    if (singleComment.id === newData.parentId) {
+      return { ...singleComment, reply: [...singleComment.reply, newComment] };
+    } else return singleComment;
+  });
+};
+
 const NestedComponent = () => {
   const [commnetState, setCommnetState] = useState([...data]);
-
   const [commnetValue, setCommnetValue] = useState("");
+
   const handleChange = (e) => {
     setCommnetValue(e.target.value);
   };
+
   const handleComment = (e) => {
     e?.preventDefault();
     if (!commnetValue) return;
@@ -37,6 +52,14 @@ const NestedComponent = () => {
     setCommnetState(copy);
     setCommnetValue("");
   };
+
+  // handle comment from nested component
+  const handleReplyComment = useCallback((newData = {}) => {
+    let copy = commnetState.slice();
+    copy = updateComment(copy, newData);
+    setCommnetState(copy);
+  }, []);
+
   return (
     <div className="flex flex-col gap-1 w-full p-2 pb-3">
       <h2>Nested Component System</h2>
@@ -63,7 +86,10 @@ const NestedComponent = () => {
           <option value="oldest">Oldest</option>
         </select>
       </div>
-      <CommentComponent commentData={commnetState} />
+      <CommentComponent
+        commentData={commnetState}
+        handleReplyComment={handleReplyComment}
+      />
     </div>
   );
 };
