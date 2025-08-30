@@ -1,10 +1,26 @@
 import React from "react";
+import Comment from "../components/Comment";
 
 const data = [
-    {id: 1, comment: "Hello, how are you", reply: [{id: 2, comment: "I am fine, thank you"}]},
-    {id: 3, comment: "Hello, how are you", reply: []},
-    {id: 4, comment: "Hello, how are you", reply: [{id: 5, comment: "I am fine, thank you"}]}
-]
+  {
+    id: 1,
+    comment: "Hello, how are you",
+    reply: [
+      {
+        id: 2,
+        comment: "I am fine, thank you",
+        reply: [{ id: 32, comment: "I am fine, thank you", reply: [] }],
+      },
+      { id: 23, comment: "where are you ?" },
+    ],
+  },
+  { id: 3, comment: "Are you there", reply: [] },
+  {
+    id: 4,
+    comment: "So I donot know",
+    reply: [{ id: 5, comment: "we are doing, good" }],
+  },
+];
 
 const NestedComponent = () => {
   return (
@@ -25,25 +41,7 @@ const NestedComponent = () => {
           <option value="oldest">Oldest</option>
         </select>
       </div>
-      <div className="flex flex-col gap-1">
-        {data.map((i, index) => (
-          <div className="comment bg-blue-200" key={index}>
-            <div className="commentHeader">
-              <span>Sameer</span>
-              <span>1 hour ago</span>
-            </div>
-            <div className="commentBody">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, quod.
-              </p>
-            </div>
-            <div className="commentFooter">
-              <button>Reply</button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Comment data={data} />
     </div>
   );
 };
