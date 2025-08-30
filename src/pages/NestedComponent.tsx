@@ -1,5 +1,5 @@
-import React from "react";
-import Comment from "../components/Comment";
+import React, { useState } from "react";
+import CommentComponent from "../components/Comment";
 
 const data = [
   {
@@ -23,16 +23,38 @@ const data = [
 ];
 
 const NestedComponent = () => {
+  const [commnetState, setCommnetState] = useState([...data]);
+
+  const [commnetValue, setCommnetValue] = useState("");
+  const handleChange = (e) => {
+    setCommnetValue(e.target.value);
+  };
+  const handleComment = (e) => {
+    e?.preventDefault();
+    if (!commnetValue) return;
+    let copy = commnetState.slice();
+    copy = [{ id: Date.now(), comment: commnetValue, reply: [] }, ...copy];
+    setCommnetState(copy);
+    setCommnetValue("");
+  };
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1 w-full p-2 pb-3">
       <h2>Nested Component System</h2>
-      <div className="w-full">
-        <input
+      <div className="w-full flex items-center gap-2">
+        <textarea
+          value={commnetValue}
           className="border"
-          type="text"
+          rows="2"
+          cols="50"
           placeholder="Enter your comment"
-        />
-        <button className="border">comment</button>
+          onChange={handleChange}
+        ></textarea>
+        <button
+          className="cursor-pointer bg-blue-950 text-white px-4 py-2 border"
+          onClick={handleComment}
+        >
+          comment
+        </button>
       </div>
       <div className="sort">
         <span>Sort by:</span>
@@ -41,7 +63,7 @@ const NestedComponent = () => {
           <option value="oldest">Oldest</option>
         </select>
       </div>
-      <Comment data={data} />
+      <CommentComponent commentData={commnetState} />
     </div>
   );
 };
