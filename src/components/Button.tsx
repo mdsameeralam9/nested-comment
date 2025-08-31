@@ -1,7 +1,6 @@
 import type React from "react";
 import type { ButtonProps } from "../types";
 
-
 const Button:React.FC<ButtonProps> = ({ label = "Submit", onClick, type='button' }) => {
   return (
     <button

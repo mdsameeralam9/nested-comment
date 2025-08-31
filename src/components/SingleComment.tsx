@@ -5,7 +5,7 @@ import { isArrayAndHasLength } from "../util";
 import Button from "./Button";
 
 const SingleComment: React.FC<SingleCommentProps> = ({
-  data = {},
+  data,
   handleReplyComment = () => {},
 }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
