@@ -66,7 +66,7 @@ const SingleComment = ({ data = {}, handleReplyComment = () => {} }) => {
           {data?.reply?.length > 0 && (
             <div className="child pl-2 border-l-2">
               {data.reply?.map((data) => (
-                <SingleComment data={data} key={data.id} />
+                <SingleComment data={data} key={data.id} handleReplyComment={handleReplyComment}/>
               ))}
             </div>
           )}
