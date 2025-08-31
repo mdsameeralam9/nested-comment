@@ -1,9 +1,12 @@
 
+import { memo } from "react";
 import type { CommentComponentProps } from "../types";
 import SingleComment from "./SingleComment";
 
 
 const CommentComponent:React.FC<CommentComponentProps> = ({ commentData = [], handleReplyComment=()=>{} }) => {
+  console.log("CommentComponent called");
+
   return (
     <div className="flex flex-col gap-1">
       {commentData.map((data) => (
@@ -13,4 +16,4 @@ const CommentComponent:React.FC<CommentComponentProps> = ({ commentData = [], ha
   );
 };
 
-export default CommentComponent;
+export default memo(CommentComponent);

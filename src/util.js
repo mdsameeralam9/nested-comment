@@ -1,5 +1,4 @@
 
-import CommentDataInterface from "./types"
 
 export const initial_data = [
   {
