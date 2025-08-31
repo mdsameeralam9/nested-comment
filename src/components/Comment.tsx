@@ -5,7 +5,6 @@ import SingleComment from "./SingleComment";
 
 
 const CommentComponent:React.FC<CommentComponentProps> = ({ commentData = [], handleReplyComment=()=>{} }) => {
-  console.log("CommentComponent called");
 
   return (
     <div className="flex flex-col gap-1">

@@ -1,23 +1,20 @@
 export interface CommentDataInterface {
-   id: number;
-   comment: string;
-   reply?: CommentDataInterface[] 
-}
-
-export interface CommentComponentProps {
-  commentData: CommentDataInterface[];
-  handleReplyComment: (newData: {id: number, comment:string}) => void;
+  id: number;
+  comment: string;
+  reply?: CommentDataInterface[];
 }
 
 export interface ReplyInterface {
   parentId: number;
-  comment: string
+  comment: string;
+}
+
+export interface CommentComponentProps {
+  commentData: CommentDataInterface[];
+  handleReplyComment: (newData: ReplyInterface) => void;
 }
 
 export interface SingleCommentProps {
   data: CommentDataInterface;
   handleReplyComment: (newData: ReplyInterface) => void;
 }
-
-
-

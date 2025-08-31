@@ -13,7 +13,6 @@ const NestedComponent = () => {
 
   const handleComment = useCallback(() => {
     if (!commentValue) return;
-    // functional update removes commentState from deps, avoiding stale closures
     setCommentState(prev => [
       { id: Date.now(), comment: commentValue, reply: [] },
       ...prev,
@@ -22,7 +21,7 @@ const NestedComponent = () => {
   }, [commentValue]); // depends only on the current input
 
   const handleReplyComment = useCallback((newData = {}) => {
-    // functional update; compute next state from prev
+    // compute next state from prev
     setCommentState(prev => updateComment(prev.slice(), newData));
   }, []);
 
