@@ -1,38 +1,18 @@
 import React, { useCallback, useState } from "react";
 import CommentComponent from "../components/Comment";
-import { updateComment } from "../util";
+import { initial_data, updateComment } from "../util";
+import type { CommentDataInterface } from "../types";
 
-const data = [
-  {
-    id: 1,
-    comment: "Hello, how are you",
-    reply: [
-      {
-        id: 2,
-        comment: "I am fine, thank you",
-        reply: [{ id: 32, comment: "I am fine, thank you", reply: [] }],
-      },
-      { id: 23, comment: "where are you ?" },
-    ],
-  },
-  { id: 3, comment: "Are you there", reply: [] },
-  {
-    id: 4,
-    comment: "So I donot know",
-    reply: [{ id: 5, comment: "we are doing, good" }],
-  },
-];
 
 const NestedComponent = () => {
-  const [commnetState, setCommnetState] = useState([...data]);
-  const [commnetValue, setCommnetValue] = useState("");
+  const [commnetState, setCommnetState] = useState<CommentDataInterface[]>(initial_data);
+  const [commnetValue, setCommnetValue] = useState<string>("");
 
-  const handleChange = (e) => {
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setCommnetValue(e.target.value);
   };
-  
-  const handleComment = (e) => {
-    e?.preventDefault();
+
+  const handleComment = () => {
     if (!commnetValue) return;
     let copy = commnetState.slice();
     copy = [{ id: Date.now(), comment: commnetValue, reply: [] }, ...copy];
@@ -42,7 +22,6 @@ const NestedComponent = () => {
 
   // handle comment from nested component
   const handleReplyComment = (newData = {}) => {
-    if(!newData.parentId) return false;
     let copy = commnetState.slice();
     copy = updateComment(copy, newData);
     setCommnetState(copy);

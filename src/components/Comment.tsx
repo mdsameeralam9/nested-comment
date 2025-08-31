@@ -1,8 +1,9 @@
 
+import type { CommentComponentProps } from "../types";
 import SingleComment from "./SingleComment";
 
-const CommentComponent = ({ commentData = [], handleReplyComment=()=>{} }) => {
- 
+
+const CommentComponent:React.FC<CommentComponentProps> = ({ commentData = [], handleReplyComment=()=>{} }) => {
   return (
     <div className="flex flex-col gap-1">
       {commentData.map((data) => (

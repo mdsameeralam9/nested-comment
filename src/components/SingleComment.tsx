@@ -1,23 +1,24 @@
 import { useState } from "react";
+import type { ReplyInterface, SingleCommentProps } from "../types";
 
-const SingleComment = ({ data = {}, handleReplyComment = () => {} }) => {
-  const [isReplying, setIsReplying] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
+const SingleComment:React.FC<SingleCommentProps> = ({ data = {}, handleReplyComment = () => {} }) => {
+  const [isReplying, setIsReplying] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number|null>(null);
   const [replyComment, setReplyComment] = useState("");
 
-  const handleReply = (id) => {
+  const handleReply = (id:number) => {
     setIsReplying(!isReplying);
     setSelectedId(id);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setReplyComment(e.target.value);
   };
 
   // handle replycommnet
   const handleReplyCommnet = () => {
-    if (!replyComment) return;
-    const reply = {
+    if (!replyComment || !selectedId) return;
+    const reply: ReplyInterface = {
       parentId: selectedId,
       comment: replyComment,
     };
