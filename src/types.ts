@@ -1,7 +1,7 @@
 export interface CommentDataInterface {
   id: number;
   comment: string;
-  reply?: CommentDataInterface[];
+  reply?: CommentDataInterface[] | undefined;
 }
 
 export interface ReplyInterface {
@@ -23,4 +23,10 @@ export interface TextAreaProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
+}
+
+export interface ButtonProps {
+  label?: string;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
 }

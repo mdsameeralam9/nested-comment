@@ -3,6 +3,7 @@ import CommentComponent from "../components/Comment";
 import { initial_data, updateComment } from "../util";
 import type { CommentDataInterface } from "../types";
 import TextArea from "../components/TextArea";
+import Button from "../components/Button";
 
 const NestedComponent = () => {
   const [commentState, setCommentState] =
@@ -40,13 +41,7 @@ const NestedComponent = () => {
           onChange={handleChange}
           placeholder="comment..."
         />
-        <button
-          className="cursor-pointer bg-blue-950 text-white px-4 py-2 border"
-          onClick={handleComment}
-          disabled={!commentValue.trim()}
-        >
-          comment
-        </button>
+        <Button label="Comment" onClick={handleComment} />
       </div>
 
       <div className="sort">

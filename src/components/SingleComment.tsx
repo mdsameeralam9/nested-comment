@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { ReplyInterface, SingleCommentProps } from "../types";
 import TextArea from "./TextArea";
+import { isArrayAndHasLength } from "../util";
+import Button from "./Button";
 
 const SingleComment: React.FC<SingleCommentProps> = ({
   data = {},
@@ -38,12 +40,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
         <p className="text-blue-950 font-extrabold">{data.comment}</p>
       </div>
       <div className="commentFooter">
-        <button
-          onClick={() => handleReply(data.id)}
-          className="bg-blue-950 border-b-black py-0.5 px-8 cursor-pointer text-white"
-        >
-          Reply
-        </button>
+        <Button label="Reply" onClick={() => handleReply(data.id)} />
       </div>
 
       {/**  reply input render */}
@@ -55,16 +52,11 @@ const SingleComment: React.FC<SingleCommentProps> = ({
               onChange={handleChange}
               placeholder="reply comment..."
             />
-            <button
-              onClick={handleReplyCommnet}
-              className="bg-blue-950 py-2 border-b-black py-0.5 px-8 cursor-pointer text-white"
-            >
-              Reply Comment
-            </button>
+            <Button label="Reply Comment" onClick={handleReplyCommnet} />
           </div>
 
           {/**  child render */}
-          {data?.reply?.length > 0 && (
+          {isArrayAndHasLength(data.reply) && (
             <div className="child pl-2 border-l-2">
               {data.reply?.map((data) => (
                 <SingleComment

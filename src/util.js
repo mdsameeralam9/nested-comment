@@ -1,5 +1,3 @@
-
-
 export const initial_data = [
   {
     id: 1,
@@ -39,3 +37,4 @@ export const updateComment = (commentState, newData) => {
   return newUpdatedState;
 };
 
+export const isArrayAndHasLength = (arr) => Array.isArray(arr) && arr.length > 0;
