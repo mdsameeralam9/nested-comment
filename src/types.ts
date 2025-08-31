@@ -18,3 +18,9 @@ export interface SingleCommentProps {
   data: CommentDataInterface;
   handleReplyComment: (newData: ReplyInterface) => void;
 }
+
+export interface TextAreaProps {
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
+}

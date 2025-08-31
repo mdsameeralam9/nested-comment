@@ -2,18 +2,23 @@ import React, { useCallback, useState } from "react";
 import CommentComponent from "../components/Comment";
 import { initial_data, updateComment } from "../util";
 import type { CommentDataInterface } from "../types";
+import TextArea from "../components/TextArea";
 
 const NestedComponent = () => {
-  const [commentState, setCommentState] = useState<CommentDataInterface[]>(initial_data);
+  const [commentState, setCommentState] =
+    useState<CommentDataInterface[]>(initial_data);
   const [commentValue, setCommentValue] = useState<string>("");
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentValue(e.target.value);
-  }, []); // stable; does not need state
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setCommentValue(e.target.value);
+    },
+    []
+  ); // stable; does not need state
 
   const handleComment = useCallback(() => {
     if (!commentValue) return;
-    setCommentState(prev => [
+    setCommentState((prev) => [
       { id: Date.now(), comment: commentValue, reply: [] },
       ...prev,
     ]);
@@ -22,7 +27,7 @@ const NestedComponent = () => {
 
   const handleReplyComment = useCallback((newData = {}) => {
     // compute next state from prev
-    setCommentState(prev => updateComment(prev.slice(), newData));
+    setCommentState((prev) => updateComment(prev.slice(), newData));
   }, []);
 
   return (
@@ -30,13 +35,10 @@ const NestedComponent = () => {
       <h2>Nested Component System</h2>
 
       <div className="w-full flex items-center gap-2">
-        <textarea
+        <TextArea
           value={commentValue}
-          className="border"
-          rows={2}
-          cols={50}
-          placeholder="Enter your comment"
           onChange={handleChange}
+          placeholder="comment..."
         />
         <button
           className="cursor-pointer bg-blue-950 text-white px-4 py-2 border"
