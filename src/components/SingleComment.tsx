@@ -37,6 +37,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
     <div className="comment bg-blue-200 p-1">
       {/** parent comment render */}
       <div className="commentBody my-1">
+        <p className="text-xs text-gray-500">{data.date.toDateString()}</p>
         <p className="text-blue-950 font-extrabold">{data.comment}</p>
       </div>
       <div className="commentFooter">

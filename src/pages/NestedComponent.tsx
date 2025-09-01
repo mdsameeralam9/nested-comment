@@ -20,7 +20,7 @@ const NestedComponent = () => {
   const handleComment = useCallback(() => {
     if (!commentValue) return;
     setCommentState((prev) => [
-      { id: Date.now(), comment: commentValue, reply: [] },
+      { id: Date.now(), comment: commentValue, date: new Date(), like: 0, reply: [] },
       ...prev,
     ]);
     setCommentValue("");
