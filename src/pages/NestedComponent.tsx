@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 const NestedComponent = () => {
   const [commentState, setCommentState] =
-    useState<CommentDataInterface[]>();
+    useState<CommentDataInterface[]>([]);
   const [commentValue, setCommentValue] = useState<string>("");
 
   const handleChange = useCallback(
@@ -31,6 +31,7 @@ const NestedComponent = () => {
     setCommentState((prev) => updateComment(prev.slice(), newData));
   }, []);
 
+  console.log(commentState)
   return (
     <div className="flex flex-col gap-1 w-full p-2 pb-3">
       <h2>Nested Component System</h2>
