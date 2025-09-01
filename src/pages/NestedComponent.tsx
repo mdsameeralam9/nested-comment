@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 const NestedComponent = () => {
   const [commentState, setCommentState] =
-    useState<CommentDataInterface[]>(initial_data);
+    useState<CommentDataInterface[]>();
   const [commentValue, setCommentValue] = useState<string>("");
 
   const handleChange = useCallback(

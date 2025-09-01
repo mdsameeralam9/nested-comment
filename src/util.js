@@ -19,7 +19,6 @@ export const initial_data = [
   },
 ];
 
-
 export const updateComment = (commentState, newData) => {
   const newComment = {
     comment: newData.comment,
