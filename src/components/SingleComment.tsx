@@ -71,6 +71,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
                   data={data}
                   key={data.id}
                   handleReplyComment={handleReplyComment}
+                  handleLikeOrDislike={handleLikeOrDislike}
                 />
               ))}
             </div>
