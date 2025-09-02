@@ -10,6 +10,8 @@ export const initial_data = [
       },
       { id: 23, comment: "where are you ?" },
     ],
+    like: 0,
+    dislike: 0
   },
   { id: 3, comment: "Are you there", reply: [] },
   {
@@ -40,5 +42,13 @@ export const isArrayAndHasLength = (arr) => Array.isArray(arr) && arr.length > 0
 
 
 export const updateLikeOrDislike = (data, id, isLike) => {
-  
+  let copy = data.slice();
+  copy = copy.map(item => {
+    if(item.id === id){
+      return isLike ? {...item, like:item.like+1}: {...item, dislike: item.dislike+1}
+    } else if(isArrayAndHasLength(item.reply)){
+      return {...item, reply: updateLikeOrDislike(item.reply, id, isLike)}
+    } else return item
+  })
+  return copy
 }

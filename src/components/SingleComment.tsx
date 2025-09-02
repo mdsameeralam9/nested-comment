@@ -45,7 +45,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
       </div>
       <div className="commentFooter flex gap-1">
         <Button label={`Like ${data?.like ?? 0}`} onClick={() => handleLikeOrDislike(data.id, true)} />
-        <Button label="Dislike" onClick={() => handleLikeOrDislike(data.id, true)} />
+        <Button label={`Dislike ${data?.dislike ?? 0}`} onClick={() => handleLikeOrDislike(data.id, false)} />
         <Button label="Reply" onClick={() => handleReply(data.id)} />
       </div>
 

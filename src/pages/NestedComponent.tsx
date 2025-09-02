@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import CommentComponent from "../components/Comment";
-import { initial_data, updateComment } from "../util";
+import { initial_data, updateComment, updateLikeOrDislike } from "../util";
 import type { CommentDataInterface } from "../types";
 import TextArea from "../components/TextArea";
 import Button from "../components/Button";
@@ -20,7 +20,7 @@ const NestedComponent = () => {
   const handleComment = useCallback(() => {
     if (!commentValue) return;
     setCommentState((prev) => [
-      { id: Date.now(), comment: commentValue, date: new Date(), like: 0, reply: [] },
+      { id: Date.now(), comment: commentValue, date: new Date(), like: 0,dislike:0, reply: [] },
       ...prev,
     ]);
     setCommentValue("");
@@ -32,7 +32,6 @@ const NestedComponent = () => {
   }, []);
 
   const handleLikeOrDislike = (id:number, isLike:boolean): void => {
-    console.log(id, isLike);
     setCommentState(prev => updateLikeOrDislike(prev, id, isLike))
   }
 
