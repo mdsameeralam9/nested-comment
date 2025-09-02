@@ -31,6 +31,11 @@ const NestedComponent = () => {
     setCommentState((prev) => updateComment(prev.slice(), newData));
   }, []);
 
+  const handleLikeOrDislike = (id:number, isLike:boolean): void => {
+    console.log(id, isLike);
+    setCommentState(prev => updateLikeOrDislike(prev, id, isLike))
+  }
+
   console.log(commentState)
   return (
     <div className="flex flex-col gap-1 w-full p-2 pb-3">
@@ -56,6 +61,7 @@ const NestedComponent = () => {
       <CommentComponent
         commentData={commentState}
         handleReplyComment={handleReplyComment}
+        handleLikeOrDislike={handleLikeOrDislike}
       />
     </div>
   );

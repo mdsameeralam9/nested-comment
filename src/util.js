@@ -37,3 +37,8 @@ export const updateComment = (commentState, newData) => {
 };
 
 export const isArrayAndHasLength = (arr) => Array.isArray(arr) && arr.length > 0;
+
+
+export const updateLikeOrDislike = (data, id, isLike) => {
+  
+}
