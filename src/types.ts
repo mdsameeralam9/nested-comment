@@ -2,6 +2,9 @@ export interface CommentDataInterface {
   id: number;
   comment: string;
   reply?: CommentDataInterface[] | undefined;
+  date: Date;
+  like: number;
+  dislike: number;
 }
 
 export interface ReplyInterface {
@@ -12,11 +15,13 @@ export interface ReplyInterface {
 export interface CommentComponentProps {
   commentData: CommentDataInterface[];
   handleReplyComment: (newData: ReplyInterface) => void;
+  handleLikeOrDislike: (id: number, isLike: boolean) => void;
 }
 
 export interface SingleCommentProps {
   data: CommentDataInterface;
   handleReplyComment: (newData: ReplyInterface) => void;
+  handleLikeOrDislike: (id: number, isLike: boolean) => void;
 }
 
 export interface TextAreaProps {
