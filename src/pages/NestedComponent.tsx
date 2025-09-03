@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import CommentComponent from "../components/Comment";
-import { initial_data, updateComment, updateLikeOrDislike } from "../util";
+import { updateComment, updateLikeOrDislike } from "../util";
 import type { CommentDataInterface } from "../types";
 import TextArea from "../components/TextArea";
 import Button from "../components/Button";
@@ -35,18 +35,21 @@ const NestedComponent = () => {
     setCommentState(prev => updateLikeOrDislike(prev, id, isLike))
   }
 
+console.log(commentState)
+
   return (
     <div className="flex flex-col gap-1 w-full p-2 pb-3">
       <h2>Nested Component System</h2>
 
-      <div className="w-full flex items-center gap-2">
+
+      <form className="w-full flex items-center gap-2">
         <TextArea
           value={commentValue}
           onChange={handleChange}
           placeholder="comment..."
         />
         <Button label="Comment" onClick={handleComment} />
-      </div>
+      </form>
 
       <div className="sort">
         <span>Sort by:</span>
