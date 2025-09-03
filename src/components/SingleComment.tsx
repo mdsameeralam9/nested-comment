@@ -7,7 +7,7 @@ import Button from "./Button";
 const SingleComment: React.FC<SingleCommentProps> = ({
   data,
   handleReplyComment = () => {},
-  handleLikeOrDislike = () => {},
+  handleLikeOrDislike = () => {}
 }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);

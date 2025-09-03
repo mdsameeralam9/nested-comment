@@ -56,7 +56,7 @@ export const updateLikeOrDislike = (data, id, isLike) => {
 };
 
 // sortBy: "new" | "old" | "like" | "dislike"
-const sortComment = (data, sortBy) => {
+export const sortComment = (data, sortBy) => {
   const arr = Array.isArray(data) ? [...data] : [];
   const t = (d) => new Date(d).getTime(); // convert ISO string to ms since epoch
 
