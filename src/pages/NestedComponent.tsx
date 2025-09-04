@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import CommentComponent from "../components/Comment";
-import { sortComment, updateComment, updateLikeOrDislike } from "../util";
+import { deleteComment, sortComment, updateComment, updateLikeOrDislike } from "../util";
 import type { CommentDataInterface } from "../types";
 import TextArea from "../components/TextArea";
 import Button from "../components/Button";
@@ -45,6 +45,10 @@ const NestedComponent = () => {
     setCommentState((prev) => sortComment(prev, sortBy));
   };
 
+  const handleDelete = (id: number) => {
+    setCommentState((prev) => deleteComment(prev, id));
+  }
+
   return (
     <div className="flex flex-col gap-1 w-full p-2 pb-3">
       <h2>Nested Component System</h2>
@@ -75,6 +79,7 @@ const NestedComponent = () => {
         commentData={commentState}
         handleReplyComment={handleReplyComment}
         handleLikeOrDislike={handleLikeOrDislike}
+        handleDelete={handleDelete}
       />
     </div>
   );

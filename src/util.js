@@ -73,3 +73,18 @@ export const sortComment = (data, sortBy) => {
       return arr;
   }
 };
+
+export const deleteComment = (data, id) => {
+  if (!Array.isArray(data)) return [];
+
+  return data
+    // keep only items whose id does not match
+    .filter(item => item?.id !== id)
+    // for remaining items, rebuild reply recursively
+    .map(item => {
+      const replies = Array.isArray(item.reply) && item.reply.length
+        ? deleteComment(item.reply, id)
+        : item.reply;
+      return { ...item, reply: replies };
+    });
+};

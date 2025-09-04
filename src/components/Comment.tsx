@@ -6,6 +6,7 @@ const CommentComponent: React.FC<CommentComponentProps> = ({
   commentData = [],
   handleReplyComment = () => {},
   handleLikeOrDislike,
+  handleDelete
 }) => {
   return (
     <div className="flex flex-col gap-1">
@@ -15,6 +16,7 @@ const CommentComponent: React.FC<CommentComponentProps> = ({
           key={data.id}
           handleReplyComment={handleReplyComment}
           handleLikeOrDislike={handleLikeOrDislike}
+          handleDelete={handleDelete}
         />
       ))}
     </div>

@@ -7,7 +7,8 @@ import Button from "./Button";
 const SingleComment: React.FC<SingleCommentProps> = ({
   data,
   handleReplyComment = () => {},
-  handleLikeOrDislike = () => {}
+  handleLikeOrDislike = () => {},
+  handleDelete=() => {}
 }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -23,8 +24,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
   };
 
   // handle replycommnet
-  const handleReplyCommnet = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleReplyCommnet = () => {
     if (!replyComment || !selectedId) return;
     const reply: ReplyInterface = {
       parentId: selectedId,
@@ -47,21 +47,20 @@ const SingleComment: React.FC<SingleCommentProps> = ({
         <Button label={`Like ${data?.like ?? 0}`} onClick={() => handleLikeOrDislike(data.id, true)} />
         <Button label={`Dislike ${data?.dislike ?? 0}`} onClick={() => handleLikeOrDislike(data.id, false)} />
         <Button label="Reply" onClick={() => handleReply(data.id)} />
+          <Button label="Delete" onClick={() => handleDelete(data.id)} />
       </div>
 
       {/**  reply input render */}
       {isReplying && (
         <>
-          <form onSubmit={handleReplyCommnet}>
             <div className="inputwrapeer flex  gap-1 items-center my-2">
               <TextArea
                 value={replyComment}
                 onChange={handleChange}
                 placeholder="reply comment..."
               />
-              <Button label="Reply Comment" type="submit" />
+              <Button label="Reply Comment" type="button" onClick={handleReplyCommnet}/>
             </div>
-          </form>
 
           {/**  child render */}
           {isArrayAndHasLength(data.reply) && (
@@ -72,6 +71,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
                   key={data.id}
                   handleReplyComment={handleReplyComment}
                   handleLikeOrDislike={handleLikeOrDislike}
+                  handleDelete={handleDelete}
                 />
               ))}
             </div>
