@@ -22,7 +22,7 @@ export interface CommentComponentProps extends CommonComment {
   commentData: CommentDataInterface[];
 }
 
-export interface SingleCommentProps extends CommonComment  {
+export interface SingleCommentProps extends CommonComment {
   data: CommentDataInterface;
 }
 
@@ -34,6 +34,6 @@ export interface TextAreaProps {
 
 export interface ButtonProps {
   label?: string;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }

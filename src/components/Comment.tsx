@@ -1,12 +1,12 @@
-import { memo } from "react";
-import type { CommentComponentProps } from "../types";
-import SingleComment from "./SingleComment";
+import { memo } from 'react';
+import type { CommentComponentProps } from '../types';
+import SingleComment from './SingleComment';
 
 const CommentComponent: React.FC<CommentComponentProps> = ({
   commentData = [],
   handleReplyComment = () => {},
   handleLikeOrDislike,
-  handleDelete
+  handleDelete,
 }) => {
   return (
     <div className="flex flex-col gap-1">
