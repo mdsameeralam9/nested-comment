@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import type { ReplyInterface, SingleCommentProps } from "../types";
-import TextArea from "./TextArea";
-import { isArrayAndHasLength } from "../util";
-import Button from "./Button";
+import React, { useState } from 'react';
+import type { ReplyInterface, SingleCommentProps } from '../types';
+import TextArea from './TextArea';
+import { isArrayAndHasLength } from '../util';
+import Button from './Button';
 
 const SingleComment: React.FC<SingleCommentProps> = ({
   data,
   handleReplyComment = () => {},
   handleLikeOrDislike = () => {},
-  handleDelete=() => {}
+  handleDelete = () => {},
 }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [replyComment, setReplyComment] = useState("");
+  const [replyComment, setReplyComment] = useState('');
 
   const handleReply = (id: number) => {
     setIsReplying(!isReplying);
@@ -32,9 +32,8 @@ const SingleComment: React.FC<SingleCommentProps> = ({
     };
 
     handleReplyComment(reply);
-    setReplyComment("");
+    setReplyComment('');
   };
-
 
   return (
     <div className="comment bg-blue-200 p-1">
@@ -44,23 +43,25 @@ const SingleComment: React.FC<SingleCommentProps> = ({
         <p className="text-blue-950 font-extrabold">{data.comment}</p>
       </div>
       <div className="commentFooter flex gap-1">
-        <Button label={`Like ${data?.like ?? 0}`} onClick={() => handleLikeOrDislike(data.id, true)} />
-        <Button label={`Dislike ${data?.dislike ?? 0}`} onClick={() => handleLikeOrDislike(data.id, false)} />
+        <Button
+          label={`Like ${data?.like ?? 0}`}
+          onClick={() => handleLikeOrDislike(data.id, true)}
+        />
+        <Button
+          label={`Dislike ${data?.dislike ?? 0}`}
+          onClick={() => handleLikeOrDislike(data.id, false)}
+        />
         <Button label="Reply" onClick={() => handleReply(data.id)} />
-          <Button label="Delete" onClick={() => handleDelete(data.id)} />
+        <Button label="Delete" onClick={() => handleDelete(data.id)} />
       </div>
 
       {/**  reply input render */}
       {isReplying && (
         <>
-            <div className="inputwrapeer flex  gap-1 items-center my-2">
-              <TextArea
-                value={replyComment}
-                onChange={handleChange}
-                placeholder="reply comment..."
-              />
-              <Button label="Reply Comment" type="button" onClick={handleReplyCommnet}/>
-            </div>
+          <div className="inputwrapeer flex  gap-1 items-center my-2">
+            <TextArea value={replyComment} onChange={handleChange} placeholder="reply comment..." />
+            <Button label="Reply Comment" type="button" onClick={handleReplyCommnet} />
+          </div>
 
           {/**  child render */}
           {isArrayAndHasLength(data.reply) && (
