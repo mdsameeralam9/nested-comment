@@ -80,7 +80,6 @@ export const deleteComment = (data, id) => {
   return data
     // keep only items whose id does not match
     .filter(item => item?.id !== id)
-    // for remaining items, rebuild reply recursively
     .map(item => {
       const replies = Array.isArray(item.reply) && item.reply.length
         ? deleteComment(item.reply, id)

@@ -22,6 +22,7 @@ export interface SingleCommentProps {
   data: CommentDataInterface;
   handleReplyComment: (newData: ReplyInterface) => void;
   handleLikeOrDislike: (id: number, isLike: boolean) => void;
+  handleDelete: (id: number) => void;
 }
 
 export interface TextAreaProps {
